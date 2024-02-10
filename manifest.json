@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Extensión de YouTube",
+    "version": "1.0",
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "declarativeContent"
+    ],
+    "host_permissions": [
+        "*://*.youtube.com/watch*"
+    ],
+    "background": {
+        "service_worker": "scripts/service-worker.js"
+    },
+    "action": {
+        "default_icon": "logo_128.png"
+    }
+}

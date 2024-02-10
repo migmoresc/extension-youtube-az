@@ -1,0 +1,36 @@
+// chrome.action.onClicked.addListener((tab) => {
+//     if (tab.url.includes('youtube.com')) {
+//         chrome.scripting.executeScript({
+//             target: { tabId: tab.id },
+//             files: ['scripts/content.js']
+//         });
+//     } else {
+//         console.log('Esta extensión solo se puede ejecutar en YouTube.');
+//     }
+// });
+
+// background.js
+
+// Wrap in an onInstalled callback to avoid unnecessary work
+// every time the background script is run
+chrome.runtime.onInstalled.addListener(() => {
+    // Page actions are disabled by default and enabled on select tabs
+    chrome.action.disable();
+
+    // Clear all rules to ensure only our expected rules are set
+    chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
+        // Declare a rule to enable the action on example.com pages
+        let exampleRule = {
+            conditions: [
+                new chrome.declarativeContent.PageStateMatcher({
+                    pageUrl: { hostSuffix: '.youtube.com', schemes: ['https'] },
+                })
+            ],
+            actions: [new chrome.declarativeContent.ShowAction()],
+        };
+
+        // Finally, apply our new array of rules
+        let rules = [exampleRule];
+        chrome.declarativeContent.onPageChanged.addRules(rules);
+    });
+});
