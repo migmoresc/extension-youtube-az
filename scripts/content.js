@@ -1,4 +1,6 @@
-// let currentUrl = window.location.href;
-// let newUrl = currentUrl.replace("youtube", "azyoutube");
-// window.location = newUrl;
-console.log("hola");
+let currentUrl = window.location.href;
+// Enviar un mensaje al service worker
+chrome.runtime.sendMessage({
+    type: 'content_script_message',
+    data: currentUrl
+});

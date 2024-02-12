@@ -1,23 +1,35 @@
 {
     "manifest_version": 3,
-    "name": "Extensión de YouTube",
+    "name": "Extensión para YouTube",
     "version": "1.0",
     "permissions": [
         "activeTab",
-        "scripting",
-        "declarativeContent"
-    ],
-    "host_permissions": [
-        "*://*.youtube.com/watch*"
+        "scripting"
     ],
     "background": {
         "service_worker": "scripts/service-worker.js"
     },
     "action": {
         "default_icon": {
-            "16": "logo_16.png",
-            "24": "logo_24.png",
-            "32": "logo_32.png"
+            "16": "/logos/logo_16.png",
+            "24": "/logos/logo_24.png",
+            "32": "/logos/logo_32.png",
+            "48": "/logos/logo_48.png",
+            "128": "/logos/logo_128.png"
         }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "scripts/content.js"
+            ]
+        }
+    ],
+    "icons": {
+        "48": "/logos/logo_48.png",
+        "128": "/logos/logo_128.png"
     }
 }
